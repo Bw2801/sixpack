@@ -4,7 +4,7 @@
 
   <groupId>dev.benedikt.compression</groupId>
   <artifactId>sixpack</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Library for compression and decompression using the Sixpack algorithm originally written by Philip G. Gage.</description>
@@ -173,7 +173,7 @@
         <version>0.9.18</version>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <phase>pre-site</phase>
             <goals>
               <goal>dokka</goal>
               <goal>javadoc</goal>
