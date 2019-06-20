@@ -4,7 +4,7 @@
 
   <groupId>dev.benedikt.compression</groupId>
   <artifactId>sixpack</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4-SNAPSHOT</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Library for compression and decompression using the Sixpack algorithm originally written by Philip G. Gage.</description>
@@ -29,7 +29,7 @@
     <connection>scm:git:git://github.com/Bw2801/sixpack.git</connection>
     <developerConnection>scm:git:ssh://github.com:Bw2801/sixpack.git</developerConnection>
     <url>https://github.com/Bw2801/sixpack</url>
-    <tag>sixpack-1.0.3</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
