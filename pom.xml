@@ -176,8 +176,8 @@
             <phase>pre-site</phase>
             <goals>
               <goal>dokka</goal>
-              <goal>dokka:javadoc</goal>
-              <goal>dokka:javadocJar</goal>
+              <goal>javadoc</goal>
+              <goal>javadocJar</goal>
             </goals>
           </execution>
         </executions>
