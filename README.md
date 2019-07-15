@@ -1,4 +1,4 @@
-# sixpack
+# sixpack-kotlin
 
 Library for compression and decompression using the Sixpack algorithm originally written by Philip G. Gage.
 
