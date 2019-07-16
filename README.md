@@ -6,6 +6,8 @@ Library for compression and decompression using the Sixpack algorithm originally
 
 I created this library, because I was in the process of reverse engineering a file format compressed using Sixpack. However, I barely found enough information describing the algorithm, which is why I took some time to create this library.
 
+**Note**: The compression is not yet implemented fully.
+
 ## Installation
 
 The library is located in the central maven repository.
