@@ -19,16 +19,18 @@ open class SixpackCompressor(config: SixpackConfig) : SixpackBase(config) {
   }
 
   fun compress(buffer: ByteBuffer): ByteArray {
-    this.init()
+    throw RuntimeException("Data compression is not yet implemented.")
 
-    while (buffer.hasRemaining()) {
-      this.compressCode(buffer.get().toInt() and 0xff)
-    }
-
-    return this.outputBuffer.toByteArray()
+//    this.init()
+//
+//    while (buffer.hasRemaining()) {
+//      this.compressCode(buffer.get().toInt() and 0xff)
+//    }
+//
+//    return this.outputBuffer.toByteArray()
   }
 
-  private fun compressCode(code: Int) {
+  /* private */ fun compressCode(code: Int) {
     val bits = mutableListOf<Boolean>()
     var a = code + this.config.successMax
 
