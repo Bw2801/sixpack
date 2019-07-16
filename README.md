@@ -30,3 +30,16 @@ byte[] compressed = compressor.compress(byteBuffer);
 SixpackCompressor decompressor = new SixpackDecompressor(config);
 byte[] decompressed = decompressor.decompress(ByteBuffer.wrap(compressed));
 ```
+
+```kotlin
+// Use the default configuration.
+val config = SixpackConfig();
+
+// Compress the data in the given byte buffer to a byte array.
+val compressor = SixpackCompressor(config);
+val compressed = compressor.compress(byteBuffer);
+
+// Decompress the data in the given byte buffer to a byte array.
+val decompressor = SixpackDecompressor(config);
+val decompressed = decompressor.decompress(ByteBuffer.wrap(compressed));
+```
