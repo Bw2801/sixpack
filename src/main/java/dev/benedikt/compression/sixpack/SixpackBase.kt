@@ -2,8 +2,9 @@ package dev.benedikt.compression.sixpack
 
 open class SixpackBase(protected val config: SixpackConfig) {
 
+  // This represents the tree structure.
+  // TODO: convert to object-oriented tree-structure
   protected var up = IntArray(this.config.twiceMax + 1)
-
   protected var leftCode = IntArray(this.config.maxChar + 1)
   protected var rightCode = IntArray(this.config.maxChar + 1)
 
