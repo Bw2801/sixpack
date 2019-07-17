@@ -4,7 +4,7 @@ Library for compression and decompression using the Sixpack algorithm originally
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.benedikt.compression/sixpack/badge.svg)](https://maven-badges.herokuapp.com/maven-central/dev.benedikt.compression/sixpack)
 
-I created this library, because I was in the process of reverse engineering a file format compressed using Sixpack. However, I barely found enough information describing the algorithm, which is why I took some time to create this library.
+I created this library, because I was in the process of reverse engineering a file format compressed using Sixpack. However, I barely found enough resources describing or implementing the algorithm, which is why I took some time to create this library. It's aim is not to be the most performant implementation, but a more readable one.
 
 **Note**: The compression is not yet implemented fully.
 
