@@ -39,7 +39,7 @@ open class SixpackBase(protected val config: SixpackConfig) {
   }
 
   /**
-   * Update the huffman model for each code.
+   * Update the huffman model for each value.
    */
   protected fun updateHuffmanModel(code: Int) {
     var a = code + this.config.successMax
