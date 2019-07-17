@@ -4,11 +4,11 @@ import java.lang.IllegalArgumentException
 
 open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
 
-    protected val successMax = this.maxChar + 1
-    protected val twiceMax = 2 * this.maxChar + 1
+    private val successMax = this.maxChar + 1
+    private val twiceMax = 2 * this.maxChar + 1
 
     val rootNode = Node(1)
-    protected val nodes = mutableMapOf<Int, Node>()
+    private val nodes = mutableMapOf<Int, Node>()
 
     init {
         // Initializes the huffman model
@@ -42,8 +42,10 @@ open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
      * @param code the value to update the model with
      */
     fun update(code: Int) {
-        val node = this.nodes[code + successMax] ?: throw IllegalArgumentException("The given value is not part of the huffman tree: $code")
-        this.increaseFrequency(node)
+        val node = this.nodes[code + this.successMax] ?: throw IllegalArgumentException("The given value is not part of the huffman tree: $code")
+
+        node.frequency += 1
+        this.updateFrequency(node)
 
         var currentNode = node
         var parent: Node? = currentNode.parent ?: return
@@ -74,6 +76,8 @@ open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
                 uncle.parent = parent
                 currentNode.parent = grandparent
                 currentNode = parent
+
+                this.updateFrequency(parent)
             } else {
                 currentNode = currentNode.parent!!
             }
@@ -82,19 +86,13 @@ open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
         }
     }
 
-    /**
-     * Increases the node's frequency. Parent frequencies will be adjusted accordingly.
-     *
-     * @param node the node to increase the frequency for.
-     */
-    protected fun increaseFrequency(node: Node) {
-        // Increment the nodes frequency by one.
-        node.frequency += 1
+    private fun updateFrequency(node: Node) {
+        node.updateFrequency()
 
         // Scale frequencies down by half to prevent overflow. This also provides some local adaption and better
         // compression.
-        if (node.frequency >= this.maxFrequency) {
-            node.frequency = node.frequency shr 1
+        if (this.rootNode.frequency >= this.maxFrequency) {
+            this.nodes.values.forEach { it.frequency = it.frequency shr 1 }
         }
     }
 }

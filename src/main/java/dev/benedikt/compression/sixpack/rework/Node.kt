@@ -1,24 +1,26 @@
 package dev.benedikt.compression.sixpack.rework
 
-data class Node(val value: Int, private val initialFrequency: Int = 0) {
+data class Node(val value: Int, var frequency: Int = 1) {
 
     var parent: Node? = null
     var leftChild: Node? = null
     var rightChild: Node? = null
 
-    private var _frequency = this.initialFrequency
-    var frequency: Int
-        get() {
-            if (isLeaf()) return this._frequency
-            return (this.leftChild?.frequency ?: 0) + (this.rightChild?.frequency ?: 0)
-        }
-        set(value) { this._frequency = value }
-
     fun clear() {
         this.parent = null
         this.leftChild = null
         this.rightChild = null
-        this._frequency = this.initialFrequency
+    }
+
+    fun updateFrequency() {
+        if (!this.isLeaf()) {
+            // Leaf nodes frequencies are set manually. Nodes with children combines the both children's frequencies
+            // to determine their own.
+            this.frequency = (this.leftChild?.frequency ?: 0) + (this.rightChild?.frequency ?: 0)
+        }
+
+        // Cascade the frequency update to the parent.
+        this.parent?.updateFrequency()
     }
 
     fun getSibling(): Node? {
