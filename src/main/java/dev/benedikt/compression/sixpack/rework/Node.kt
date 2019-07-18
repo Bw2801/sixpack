@@ -14,7 +14,7 @@ data class Node(val value: Int, var frequency: Int = 1) {
 
     fun updateFrequency() {
         if (!this.isLeaf()) {
-            // Leaf nodes frequencies are set manually. Nodes with children combines the both children's frequencies
+            // Leaf node frequencies are set manually. Nodes with children combine each children's frequencies
             // to determine their own.
             this.frequency = (this.leftChild?.frequency ?: 0) + (this.rightChild?.frequency ?: 0)
         }
