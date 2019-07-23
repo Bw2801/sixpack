@@ -7,7 +7,6 @@ class SixpackDecompressor(val maxFrequency: Int = 2000, val terminateCode: Int =
                           val minCopy: Int = 3, val maxCopy: Int = 64,
                           val copyRanges: Int = 6, val copyBits: IntArray = intArrayOf(4, 6, 8, 10, 12, 14)) {
 
-    private var maxSize = 0
     private val codesPerRange = this.maxCopy - this.minCopy + 1
 
     private val copyMin = IntArray(this.copyRanges)
@@ -34,11 +33,9 @@ class SixpackDecompressor(val maxFrequency: Int = 2000, val terminateCode: Int =
             distance += 1 shl this.copyBits[it]
             this.copyMax[it] = distance - 1
         }
-
-        this.maxSize = distance - 1 + this.maxCopy
     }
 
-    fun decompress(inputBuffer: ByteBuffer): ByteArray {
+    fun decompress(inputBuffer: ByteBuffer): List<Byte> {
         this.init()
 
         this.inputBuffer = inputBuffer
@@ -57,14 +54,14 @@ class SixpackDecompressor(val maxFrequency: Int = 2000, val terminateCode: Int =
             // Every other code determines a range to copy codes from.
             val index = (code - this.firstCode) / this.codesPerRange
             val length = code - this.firstCode + this.minCopy - index * this.codesPerRange
-            val distance = this.getInputCode(this.copyBits[index]) + length + this.copyMin[index]
+            val distance = this.readBits(this.copyBits[index]) + length + this.copyMin[index]
             val copyFrom = output.size - distance
 
             // Copy the bytes from to the end of the output.
             (0 until length).forEach { output.add(output[copyFrom + it]) }
         } while (true)
 
-        return output.toByteArray()
+        return output
     }
 
     /**
@@ -87,11 +84,11 @@ class SixpackDecompressor(val maxFrequency: Int = 2000, val terminateCode: Int =
     }
 
     /**
-     * Reads a multi bit input code from the input stream.
+     * Reads a multi-bit code from the input stream.
      *
      * @return the input code
      */
-    private fun getInputCode(bits: Int): Int {
+    private fun readBits(bits: Int): Int {
         var mask = 1
         var code = 0
 
@@ -122,7 +119,6 @@ class SixpackDecompressor(val maxFrequency: Int = 2000, val terminateCode: Int =
         val masked = this.inputBitBuffer and 128
         val bit = masked != 0
         this.inputBitBuffer = this.inputBitBuffer shl 1 and 255
-        println(bit)
         return bit
     }
 

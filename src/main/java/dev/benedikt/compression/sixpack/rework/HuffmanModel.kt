@@ -35,6 +35,10 @@ open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
         }
     }
 
+    fun getNode(code: Int): Node {
+        return this.nodes[code + this.successMax] ?: throw IllegalArgumentException("The given value is not part of the huffman tree: $code")
+    }
+
     /**
      * Updates the huffman model by increasing the frequency of the given value and updating the order of the nodes
      * accordingly from leaf to root.
@@ -42,7 +46,7 @@ open class HuffmanModel(val maxChar: Int, val maxFrequency: Int) {
      * @param code the value to update the model with
      */
     fun update(code: Int) {
-        val node = this.nodes[code + this.successMax] ?: throw IllegalArgumentException("The given value is not part of the huffman tree: $code")
+        val node = this.getNode(code)
 
         node.frequency += 1
         this.updateFrequency(node)
