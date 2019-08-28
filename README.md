@@ -6,7 +6,11 @@ Library for compression and decompression using the Sixpack algorithm originally
 
 I created this library, because I was in the process of reverse engineering a file format compressed using Sixpack. However, I barely found enough resources describing or implementing the algorithm, which is why I took some time to create this library. It's aim is not to be the most performant implementation (although it's still quite fast), but a more readable one.
 
-**Note**: The compression is not yet implemented fully.
+## Progress
+
+The decompression algorithm is fully implemented and working.
+
+The compression algorithm however is not completed yet. It does generate decompressable data, but no compression is happening yet.
 
 ## Installation
 
